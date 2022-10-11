@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'chopsic';
+    src: url('../Chopsic.ttf');
+}
+
+.main-container{
+    background-image: url("../bg.gif");
+}
