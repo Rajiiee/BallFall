@@ -1,8 +1,53 @@
 @font-face {
-    font-family: 'chopsic';
-    src: url('../Chopsic.ttf');
+    font-family: "chopsic";
+    src: url("../fonts/Chopsic.ttf");
 }
 
-.main-container{
+body {
+    margin: 0;
+    padding: 0;
     background-image: url("../bg.gif");
+    /* overflow-y: hidden;
+    overflow-x: hidden; */
+}
+.group{
+    display:flex;
+    flex-direction: column;
+}
+
+
+.main-container {
+    font-family: chopsic, serif;
+    font-size: 4vh;
+    justify-content: center;
+    align-items: center;
+    color: antiquewhite;
+    width: 70vw;
+    height: 100vh;
+    border: black 1px solid;
+    display: flex;
+    flex-direction: column;
+    }
+
+
+.btnbox{
+    display:flex;
+    width:30vw;
+
+}
+@media screen and (max-width:500px){
+   #canvas{
+    height: 300px;
+    width:300px;
+   }
+
+   .main-container{
+    margin: 0;
+    padding-top: 20px;
+
+   }
+
+
+}
+    
 }

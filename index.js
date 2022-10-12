@@ -2,6 +2,9 @@
         const ctx = canvas.getContext("2d");
         const cwidth = canvas.width;
         const cheight = canvas.height;
+        const leftBtn = document.getElementById("left");
+        const rightBtn = document.getElementById("right");
+        
 
         function randHoleX() {
           return Math.floor(Math.random() * 270);
@@ -9,15 +12,7 @@
 
         let ball = { x: 300, y: 0, r: 9 };
         let Platforms = [
-          { x: 0, y: cheight, w: cwidth, h: 10, holeX: randHoleX(), holeW: 40 },
-          {
-            x: 0,
-            y: cheight + 50,
-            w: cwidth,
-            h: 10,
-            holeX: randHoleX(),
-            holeW: 40,
-          },
+          { x: 0, y: cheight, w: cwidth, h: 12, holeX: randHoleX(), holeW: 40 },
         ];
         let leftpressed = false;
         let rightpressed = false;
@@ -29,7 +24,7 @@ var over;
 var settle;
 
 settle = new Audio("bricktouch.wav");
-        over = new Audio("gameover.wav");
+over = new Audio("gameover.wav");
 
         scoreInterval = setInterval(() => {
           score++;
@@ -38,19 +33,32 @@ settle = new Audio("bricktouch.wav");
         drawBall();
         drawPlatforms();
         movePlatforms();
+        
+// leftBtn.addEventListener("click",(
+//         if (ball.x - ball.r > 0) {
+//             ball.x -= 5;
+// })
+// );
+// rightBtn.addEventListener("click",( 
+// if (ball.x + ball.r < cwidth) {
+//     ball.x += 5;
+//   }
+  
+// )
+// );
 
         function movePlatforms() {
           let count = 0;
           setInterval(() => {
             if (count == Math.floor(50)) {
               if (Platforms.length > 10) {
-                Platforms.splice(0, 1);
+                Platforms.splice(0,2);
               }
               Platforms.push({
                 x: 0,
-                y: cheight + 50,
+                y: cheight + 40,
                 w: cwidth,
-                h: 10,
+                h: 12,
                 holeX: randHoleX(),
                 holeW: 40,
               });
@@ -76,6 +84,18 @@ settle = new Audio("bricktouch.wav");
             drawBall();
             checkGameOver();
             drawScore();
+            if (score > 15) {
+              Platforms.forEach((pl) => {
+                pl.y = pl.y - .4;
+              })
+              ball.y += 5;
+              
+            }
+            else if(score>30){
+              Platforms.forEach((pl) => {
+                pl.y = pl.y - .4;
+              })
+            }
             count++;
           }, 20);
         }
@@ -88,8 +108,17 @@ settle = new Audio("bricktouch.wav");
 
 function gameover() {
             over.play();
-            alert("Game Over!! \nBetter Luck Next Time");
-            alert("Score:" + score);;
+             alert("Game Over!! \nBetter Luck Next Time");
+  alert("Score:" + score);
+  reset();
+}
+        
+function reset() {
+  ball = { x: 150, y: -10, r: 5 };
+  Platforms = [{ x: 0, y: cheight, holeX: randHoleX(), holeW: 40 }];
+  clearInterval(interval);
+  interval = null;
+  movePlatforms();
         }
 
         function holdAndDrop(closest) {
@@ -106,28 +135,47 @@ function gameover() {
           }
         }
 
-        function drawBall() {
-          if (leftpressed && ball.x - ball.r > 0) {
-            ball.x -= 2;
-          }
-          if (rightpressed && ball.x + ball.r < cwidth) {
-            ball.x += 2;
-          }
+function drawBall() {
+  moveleft();
+  moveright();
           ctx.beginPath();
           ctx.arc(ball.x, ball.y, ball.r, 0, 2 * Math.PI);
           ctx.fillStyle = "brown";
           ctx.stroke = "2px solid black";
           ctx.fill();
           ctx.closePath();
-        }
+}
+        function moveleft(){
+        if (ball.x - ball.r > 0) {
+            ball.x -= 5;
+}
+};
+          
+function moveright() {
+  if (ball.x + ball.r < cwidth) {
+    ball.x += 5;
+  }
+}
 
         function drawScore() {
           ctx.beginPath();
-          ctx.fillStyle = "black";
+          ctx.fillStyle = "white";
           ctx.fill();
-          ctx.font = "30px Chopsic";
+          ctx.font = "30px chopsic";
           ctx.fillText("Score:" + score, 20, 30);
           ctx.closePath();
+}
+        
+function levelDisplay() {
+  ctx.beginPath();
+  ctx.fillStyle = "white";
+  ctx.fill();
+  ctx.font = "20px chopsic";
+  ctx.fillStyle = "text-align:right";
+  if (score < 15) {
+    ctx.fillText("Level 1");
+  }
+  
         }
 
         function drawPlatforms() {
@@ -141,7 +189,7 @@ function gameover() {
           function createHole(pl) {
             ctx.beginPath();
             ctx.rect(pl.holeX, pl.y, pl.holeW, pl.h);
-            ctx.fillStyle = "white";
+            ctx.fillStyle = "black";
             ctx.fill();
             ctx.closePath();
           }
@@ -159,25 +207,25 @@ function gameover() {
             switch (e.keyCode) {
               case 37:
                 console.log("Left Key pressed!");
-                leftpressed = true;
+                moveleft();
                 console.log(leftpressed);
                 break;
               case 39:
-                rightpressed = true;
+                moveright();
                 console.log(rightpressed);
                 break;
             }
           };
-          document.onkeyup = function (e) {
-            switch (e.keyCode) {
-              case 37:
-                leftpressed = false;
-                console.log(leftpressed);
-                break;
-              case 39:
-                rightpressed = false;
-                console.log(rightpressed);
-                break;
-            }
-          };
+          // document.onkeyup = function (e) {
+          //   switch (e.keyCode) {
+          //     case 37:
+          //       leftpressed = false;
+          //       console.log(leftpressed);
+          //       break;
+          //     case 39:
+          //       rightpressed = false;
+          //       console.log(rightpressed);
+          //       break;
+          //   }
+          // };
         }
