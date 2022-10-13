@@ -6,7 +6,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-image: url("../bg.gif");
+    background-image: url("bg.gif");
     /* overflow-y: hidden;
     overflow-x: hidden; */
 }
@@ -35,6 +35,7 @@ body {
     width:30vw;
 
 }
+
 @media screen and (max-width:500px){
    #canvas{
     height: 300px;
@@ -47,7 +48,4 @@ body {
 
    }
 
-
-}
-    
 }
