@@ -24,10 +24,27 @@
         </canvas>
         <script src="index.js"></script>
       </div>
-      <div class="btnbox">
-        <button class="btn" id="left"><img src="left.png" /></button>
-        <button class="btn" id="right"><img src="right.png" /></button>
+      <div class="btn-container">
+        <div class="btnbox">
+          <button onclick="myfunction1()" class="btn" id="left">
+            <img src="left.png" />
+          </button>
+          <button onclick="myfunction2()" class="btn" id="right">
+            <img src="right.png" />
+          </button>
+        </div>
       </div>
     </div>
+    <script>
+      function myfunction1() {
+        console.log("working");
+        moveleftbtn();
+      }
+
+      function myfunction2() {
+        console.log("working2");
+        moverightbtn();
+      }
+    </script>
   </body>
 </html>

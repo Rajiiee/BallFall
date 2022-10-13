@@ -34,18 +34,7 @@ over = new Audio("gameover.wav");
         drawPlatforms();
         movePlatforms();
         
-// leftBtn.addEventListener("click",(
-//         if (ball.x - ball.r > 0) {
-//             ball.x -= 5;
-// })
-// );
-// rightBtn.addEventListener("click",( 
-// if (ball.x + ball.r < cwidth) {
-//     ball.x += 5;
-//   }
-  
-// )
-// );
+var timer=setInterval(score,1000)
 
         function movePlatforms() {
           let count = 0;
@@ -91,9 +80,9 @@ over = new Audio("gameover.wav");
               ball.y += 5;
               
             }
-            else if(score>30){
+            else if(score>40){
               Platforms.forEach((pl) => {
-                pl.y = pl.y - .4;
+                pl.y = pl.y - .5;
               })
             }
             count++;
@@ -107,19 +96,15 @@ over = new Audio("gameover.wav");
         }
 
 function gameover() {
-            over.play();
+  over.play();
              alert("Game Over!! \nBetter Luck Next Time");
   alert("Score:" + score);
-  reset();
+  clearInterval(timer)
+  interval = null
+  ball = { x: 300, y: 10, r: 9 };
+  restartGame()
 }
         
-function reset() {
-  ball = { x: 150, y: -10, r: 5 };
-  Platforms = [{ x: 0, y: cheight, holeX: randHoleX(), holeW: 40 }];
-  clearInterval(interval);
-  interval = null;
-  movePlatforms();
-        }
 
         function holdAndDrop(closest) {
           if (ball.y > closest.y - ball.r) {
@@ -157,6 +142,17 @@ function moveright() {
   }
 }
 
+        function moveleftbtn(){
+        if (ball.x - ball.r > 0) {
+            ball.x -= 10;
+}
+};
+          
+function moverightbtn() {
+  if (ball.x + ball.r < cwidth) {
+    ball.x += 10;
+  }
+}
         function drawScore() {
           ctx.beginPath();
           ctx.fillStyle = "white";
@@ -216,16 +212,8 @@ function levelDisplay() {
                 break;
             }
           };
-          // document.onkeyup = function (e) {
-          //   switch (e.keyCode) {
-          //     case 37:
-          //       leftpressed = false;
-          //       console.log(leftpressed);
-          //       break;
-          //     case 39:
-          //       rightpressed = false;
-          //       console.log(rightpressed);
-          //       break;
-          //   }
-          // };
+          
+}
+function restartGame() {
+  canvas.style.display = "none";
         }
