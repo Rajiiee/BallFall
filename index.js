@@ -19,7 +19,8 @@
         let interval = (scoreInterval = null);
         let score = 0;
         let gravity = 0.5;
-        let dropSpeed = 0;
+let dropSpeed = 0;
+let a = 0;
 var over;
 var settle;
 
@@ -89,20 +90,22 @@ var timer=setInterval(score,1000)
           }, 20);
         }
 
-        function checkGameOver() {
-            if (ball.y < 0) {
+function checkGameOver() {
+          if (ball.y < 0 && a==0) {
                 gameover();
           }
         }
 
 function gameover() {
+  a = 1;
   over.play();
-             alert("Game Over!! \nBetter Luck Next Time");
-  alert("Score:" + score);
+  if (!(alert("Game Over!! \nBetter Luck Next Time\n Score:" + score))) {
+    window.location.reload();
+  }
+  console.log("Refresh");
   clearInterval(timer)
   interval = null
-  ball = { x: 300, y: 10, r: 9 };
-  restartGame()
+  
 }
         
 
@@ -214,6 +217,3 @@ function levelDisplay() {
           };
           
 }
-function restartGame() {
-  canvas.style.display = "none";
-        }
