@@ -1,12 +1,12 @@
 @font-face {
     font-family: "chopsic";
-    src: url("Chopsic.ttf");
+    src: url("fonts/Chopsic.ttf");
 }
 
 body {
     margin: 0;
     padding: 0;
-    background-image: url("bg.gif");
+    background-image: url("img/bg.gif");
     overflow-y: hidden;
     overflow-x: hidden; 
 }

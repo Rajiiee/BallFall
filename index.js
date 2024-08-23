@@ -24,8 +24,8 @@ let a = 0;
 var over;
 var settle;
 
-settle = new Audio("bricktouch.wav");
-over = new Audio("gameover.wav");
+settle = new Audio("audio/bricktouch.wav");
+over = new Audio("audio/gameover.wav");
 
         scoreInterval = setInterval(() => {
           score++;
